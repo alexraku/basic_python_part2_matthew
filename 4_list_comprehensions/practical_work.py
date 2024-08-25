@@ -1,5 +1,5 @@
 def nested_list_gen() -> list:
-    return []
+    return [1]
 
 
 def nested_list_gen_lc() -> list:

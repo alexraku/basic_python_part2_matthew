@@ -36,7 +36,20 @@ def nested_list_gen1():
     print(all_list)
 
 
+def caesar_cipher():
+    alphabet = ["а", "б", "в", "г", "д", "е", "ё", "ж", "з", "и", "й", "к",
+                "л", "м", "н", "о", "п", "р", "с", "т", "у", "ф", "х", "ц",
+                "ч", "ш", "щ", "ъ", "ы", "ь", "э", "ю", "я"]
+    text = input("Введите сообщение: ")
+    shift = int(input("Введите сдвиг: "))
+    ciphered_text = [alphabet[(alphabet.index(letter) + shift) % 33]
+                     if letter in alphabet else letter for letter in text]
+    new_text = "".join(ciphered_text)
+    print("Зашифрованное предложение:", new_text)
+
+
 if __name__ == '__main__':
     nested_list_gen()
     nested_list_gen_lc()
     nested_list_gen1()
+    caesar_cipher()

@@ -37,9 +37,7 @@ def nested_list_gen1():
 
 
 def caesar_cipher():
-    alphabet = ["а", "б", "в", "г", "д", "е", "ё", "ж", "з", "и", "й", "к",
-                "л", "м", "н", "о", "п", "р", "с", "т", "у", "ф", "х", "ц",
-                "ч", "ш", "щ", "ъ", "ы", "ь", "э", "ю", "я"]
+    alphabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
     text = input("Введите сообщение: ")
     shift = int(input("Введите сдвиг: "))
     ciphered_text = [alphabet[(alphabet.index(letter) + shift) % 33]

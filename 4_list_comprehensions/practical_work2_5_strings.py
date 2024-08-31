@@ -8,7 +8,7 @@ def the_longest_word():
     longest_word = ""
     for word in text:
         if "." in word:
-            word = "".join([sym for sym in word if sym != "."])
+            word = "".join([sym for sym in word if sym.isalpha()])
         if len(word) > len(longest_word):
             longest_word = word
     print("Самое длинное слово:", longest_word)
@@ -28,10 +28,10 @@ def files():
 
 
 def capital_letters():
-    text = input("Введите строку: ").split()
-    for word_i in range(len(text)):
-        text[word_i] = text[word_i].title()
-    print("Результат:", " ".join(text))
+    text = input("Введите строку: ").title()
+    # for word_i in range(len(text)):
+    #     text[word_i] = text[word_i].title()
+    print(text)
 
 
 def password():
@@ -40,13 +40,9 @@ def password():
         if len(your_password) < 8:
             print("Пароль ненадёжный. Попробуйте ещё раз.\n")
             continue
-        num_count = 0
-        u_flag = False
-        for sym in your_password:
-            if sym.isupper():
-                u_flag = True
-            if sym.isdigit():
-                num_count += 1
+        num_l = [num for num in your_password if num.isdigit()]
+        num_count = len(num_l)
+        u_flag = not your_password.islower()
         if u_flag and num_count >= 3:
             print("Это надёжный пароль.")
             break
@@ -120,11 +116,11 @@ def comment_analysis():
 
 
 if __name__ == '__main__':
-    menu()
+    # menu()
     # the_longest_word()
     # files()
     # capital_letters()
-    # password()
+    password()
     # compression()
     # ip_address2()
     # running_string()

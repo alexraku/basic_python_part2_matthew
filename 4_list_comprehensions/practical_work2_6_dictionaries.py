@@ -14,7 +14,7 @@ def songs2():
     songs_num = int(input("Сколько песен выбрать? "))
 
     for my_song in range(1, songs_num + 1):
-        while True:
+        while True: # хорошо, что ты обработал ввод несуществующей песни, молодец!!!
             song = input(f"\nНазвание {my_song} песни: ").lower()
             if song in violator_songs:
                 total_time += violator_songs[song]
@@ -74,7 +74,8 @@ def cryptocurrency():
     data["ETH"]["total_diff"] = 100
     data["tokens"][0]["fst_token_info"]["name"] = "doge"
     data["ETH"]["totalOut"] = data["tokens"][0].pop("total_out") + \
-        data["tokens"][1].pop("total_out")
+        data["tokens"][1].pop("total_out") # перепиши используя проход по всем элементам значения словаря с ключом tokens, циклом.
+    # В остальном все хорошо, молодец.
     data["tokens"][1]["sec_token_info"]["total_price"] = \
         data["tokens"][1]["sec_token_info"].pop("price")
 
@@ -114,7 +115,7 @@ def products():
             product,
             total_quantity,
             total_price
-        ))
+        ).replace(",", ' '))# вместо разделителя для тысяч используй пробел и обрати внимание, что только для чисел больше 9999.
 
 
 def histogram2():
@@ -134,6 +135,7 @@ def histogram2():
         for word_count in inverted_dict:
             if sym_dict[sym] == word_count:
                 inverted_dict[word_count].append(sym)
+    #Сделай одним циклом и без предварительного заполнения инвертированного словаря
     print("\nИнвертированный словарь частот:")
     for elem in inverted_dict:
         print(elem, ":", inverted_dict[elem])
@@ -146,6 +148,7 @@ def synonym_dictionary():
         word_pair = input(f"{num}-я пара: ").lower().split(" - ")
         synonym_dict[word_pair[0]] = word_pair[1]
     rev_synonym_dict = {synonym_dict[key]: key for key in synonym_dict}
+    # rev_synonym_dict = {value: key for key, value in synonym_dict.items()}
     while True:
         word = input("Введите слово: ").lower()
         if word in synonym_dict:
@@ -227,9 +230,9 @@ def again_palindrome():
 
 
 if __name__ == '__main__':
-    songs2()
+    # songs2()
     # cryptocurrency()
-    # products()
+    products()
     # histogram2()
     # synonym_dictionary()
     # pizza()

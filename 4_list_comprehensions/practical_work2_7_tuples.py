@@ -27,6 +27,8 @@ def task1():
         interests = []
         surnames = 0
         for person in info_dict.values():
+            #хорошо что используешь dict.get() если ключа не будет в словаре
+            #то ничего страшного не произойдет.
             interests.extend(person.get('interests', []))
             surnames += len(person.get('surname', ""))
         return set(interests), surnames
@@ -45,6 +47,13 @@ def task1():
             print(f"У студента {s_id} отсутствуют следующие характеристики: "
                   f"{missing_attributes}")
 
+    #упрощение функции проверки
+    required_fields = ['name', 'surname', 'age', 'interests']
+    for s_id, student in students.items():
+        missing_attributes = [attr for attr in required_fields if not student.get(attr)]
+        if missing_attributes:
+            print(f"У студента с ID: {s_id}, отсутствуют аттрибуты: {', '.join(missing_attributes)}")
+
     pairs = [(s_id, value.get("age", "_")) for s_id, value in students.items()]
     print("Список пар «ID студента — возраст»:", pairs)
 
@@ -54,7 +63,10 @@ def task1():
 
 
 def task2():
+
     def is_prime(num):
+        # Хорошее решение, но не универсальное, напиши универсальную функцию
+        # которая находит простые числа в диапазоне от 0 до N
         prime_num_set = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43,
                          47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97}
         if num in prime_num_set:
@@ -69,6 +81,7 @@ def task2():
 
 
 def task3():
+    # Тут все сделано хорошо!
     players = {
         ("Ivan", "Volkin"): (10, 5, 13),
         ("Bob", "Robbin"): (7, 5, 14),
@@ -80,6 +93,7 @@ def task3():
 
 
 def task4():
+    # посмотри, еще есть 3й вариант
     num_list = [randint(0, 10) for _ in range(10)]
     print("Оригинальный список:", num_list)
 
@@ -93,16 +107,31 @@ def task4():
     new_list = list(zip(n_list1, n_list2))
     print("Новый список:", new_list)
 
+    # вариант 3
+    n_list = [(n1, n2) for n1, n2 in zip(num_list[0::2], num_list[1::2])]
+    print("Новый список:", n_list)
+
 
 def task5():
+    # Посмотри еще один вариант реализации tpl_sort
     def tpl_sort(num_tuple):
         for elem in num_tuple:
             if not isinstance(elem, int):
                 return num_tuple
         return tuple(sorted(num_tuple))
 
+    def tpl_sort_1(num_tuple):
+        if all(map(lambda elem: isinstance(elem, int), num_tuple)):
+            return tuple(sorted(num_tuple))
+        return num_tuple
+
+    def tpl_sort_2(num_tuple):
+        if all(isinstance(elem, int) for elem in num_tuple):
+            return tuple(sorted(num_tuple))
+        return num_tuple
+
     tpl = (6, 3, -1, 8, 4, 10, -5)
-    print(tpl_sort(tpl))
+    print(tpl_sort_1(tpl))
 
 
 def task6():
@@ -141,6 +170,7 @@ def task6():
 
 
 def task7():
+    # сделал хорошо, но можно лучше ))
     obj1 = "abcd"
     obj2 = (10, 20, 30, 40)
     obj1_len = len(obj1)
@@ -152,12 +182,17 @@ def task7():
     for tpl in result:
         print(tpl)
 
+def my_zip(first, second) -> tuple:
+    border = min(len(first), len(second))
+    for index in range(border):
+        yield first[index], second[index]
+
 
 if __name__ == '__main__':
-    task1()
+    # task1()
     # task2()
     # task3()
     # task4()
     # task5()
     # task6()
-    # task7()
+    task7()

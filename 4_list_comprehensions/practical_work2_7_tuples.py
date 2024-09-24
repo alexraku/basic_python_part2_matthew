@@ -27,8 +27,8 @@ def task1():
         interests = []
         surnames = 0
         for person in info_dict.values():
-            #хорошо что используешь dict.get() если ключа не будет в словаре
-            #то ничего страшного не произойдет.
+            # хорошо что используешь dict.get() если ключа не будет в словаре
+            # то ничего страшного не произойдет.
             interests.extend(person.get('interests', []))
             surnames += len(person.get('surname', ""))
         return set(interests), surnames
@@ -65,13 +65,15 @@ def task1():
 def task2():
 
     def is_prime(num):
-        # Хорошее решение, но не универсальное, напиши универсальную функцию
-        # которая находит простые числа в диапазоне от 0 до N
-        prime_num_set = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43,
-                         47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97}
-        if num in prime_num_set:
+        num2 = 2
+        if num < num2:
+            return False
+        while num2 <= num ** 0.5:
+            if num % num2 == 0:
+                return False
+            num2 += 1
+        else:
             return True
-        return False
 
     def prime_index_list(obj):
         return [elem for elem_index, elem in enumerate(obj)
@@ -170,12 +172,9 @@ def task6():
 
 
 def task7():
-    # неправильно, переделай пожалуйста))
     obj1 = "abcd"
     obj2 = (10, 20, 30, 40)
-    obj1_len = len(obj1)
-    obj2_len = len(obj2)
-    max_len = obj1_len if obj1_len > obj2_len else obj2_len
+    max_len = min(len(obj1), len(obj2))
 
     result = ((obj1[num], obj2[num]) for num in range(max_len))
     print(result)

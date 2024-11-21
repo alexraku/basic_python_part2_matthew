@@ -23,6 +23,7 @@ def task1():
                 except ValueError as exc:
                     errors_file.write(f"line {line_num + 1}: {exc}\n")
     print("Общее кол-во символов:", sym_count)
+    # Молодец, хороший код!
 
 
 def task2():
@@ -50,6 +51,7 @@ def task2():
         else:
             print("Вы успешно выполнили условие для "
                   "выхода из порочного цикла!")
+    # Хороший код, молодец!
 
 
 def task3():
@@ -70,8 +72,9 @@ def task3():
         data = string.split()
         if len(data) != 3:
             raise IndexError("Не присутствуют все три поля")
-        name, email, age = data
-        age = int(age)
+            # формулировка не подойдет если полей больше.
+        name, email, age = data # используешь распаковку, круто ;)
+        age = int(age) # лучше обработать ввод нецифровых символов, чтобы программа не упала в неконтролируемую ошибку.
         if not name.isalpha():
             raise NameError("Поле «Имя» содержит не только буквы")
         if not ("@" in email and "." in email):
@@ -82,6 +85,8 @@ def task3():
     with open("registrations.txt", "r", encoding="utf-8") as read_file:
         with open("registrations_good.log", "w", encoding="utf-8") \
                 as good_file:
+            # код буде работать, но я бы открыл оба файла в одном контекстном
+            # менеджере, чтобы исключить вложенность контекстных менеджеров
             with open("registrations_bad.log", "w", encoding="utf-8") \
                     as bad_file:
                 for line in read_file:
@@ -91,6 +96,7 @@ def task3():
                     except (IndexError, NameError, SyntaxError, ValueError) \
                             as exc:
                         bad_file.write(f"{line.strip()}       {exc}\n")
+    # хорошо, но посмотри комментарии.
 
 
 def task4():
@@ -120,18 +126,22 @@ def task4():
         print("\nВыберите действие:\n"
               f"1. Посмотреть текущий текст чата.\n2. Отправить сообщение\n"
               f"3. Выйти из программы\n  > ", end="")
-        choice = input()
+        choice = input() # не хватает обработки ошибки ввода нецифровых символов
         if choice == "1":
             show_chat()
         elif choice == "2":
             send_a_message()
             if is_first_message:
-                is_first_message = False
+                is_first_message = False # использовать глобальную переменную
+                # это не круто, т.к. затрудняет поиск багов и отладку более
+                # менее больших программ. Все данные в функцию должны заходить
+                # как аргументы. Глобальные переменные - крайний случай.
         elif choice == "3":
             print("\nЗавершение работы...")
             break
         else:
             print("Ошибка ввода. попробуйте ещё раз")
+    # Хорошо, рабочий код, но обрати внимание
 
 
 def task5():
@@ -161,12 +171,14 @@ def task5():
         if square_root:
             print(square_root)
     except ValueError:
-        print("Ошибка. Введена строка.")
+        print("Ошибка. Введена строка.") # Формулировка не подойдет для
+        # десятичной дроби 1.34
+    # Хороший код, молодец.
 
 
 if __name__ == '__main__':
-    task1()
+    # task1()
     # task2()
     # task3()
-    # task4()
+    task4()
     # task5()

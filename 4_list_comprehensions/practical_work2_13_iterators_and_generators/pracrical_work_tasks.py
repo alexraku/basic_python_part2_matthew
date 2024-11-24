@@ -53,7 +53,9 @@ def task2():
     my_dir = "practical_work2_9_files"
     start = os.path.abspath(os.path.join("..", "..", "..", "..",
                                          "PycharmProjects"))
-    paths = gen_file_path(my_dir)
+    # Можно убрать переменную start, тогда программа будет искать директорию
+    # начиная с корневого диска, что увеличит время ее работы
+    paths = gen_file_path(my_dir, start)
     print("Пути до файлов в директории practical_work2_9_files:")
     for path in paths:
         print("   ", path)
